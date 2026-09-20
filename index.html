@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EO · Lector de lotes · Bodega Colemun Cuenca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600&family=Cinzel:wght@500;600&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #eef1f6; --card: #ffffff; --text: #16202f; --muted: #5b6678; --line: #dbe1ec;
+  --navy: #0f2547; --navy-2: #1d3f75; --navy-soft: #e6ecf7;
+  --wine: #6b1236; --wine-2: #922050; --gold: #e0a93b; --wine-soft: #f7e6ed;
+  --field: #f8f9fc; --accent-t: #1d3f75;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1322; --card: #142038; --text: #eaf0fa; --muted: #a2afc6; --line: #26365a;
+    --navy-soft: #1b2c4d; --wine-soft: #3a1626; --field: #0f192d; --accent-t: #9fbdf0;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1322; --card: #142038; --text: #eaf0fa; --muted: #a2afc6; --line: #26365a;
+  --navy-soft: #1b2c4d; --wine-soft: #3a1626; --field: #0f192d; --accent-t: #9fbdf0;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.4; -webkit-text-size-adjust: 100%;
+}
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: #fff; padding: 22px 18px 44px; position: relative; overflow: hidden;
+}
+.hero-in { max-width: 560px; margin: 0 auto; position: relative; z-index: 1; }
+.hero .top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.logo-plate { flex: none; width: 120px; background: #fff; border-radius: 14px; padding: 6px 8px; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+.logo-plate svg { display: block; width: 100%; height: auto; }
+.hero .eo { position: relative; flex: none; margin-left: auto; align-self: flex-start; width: 62px; height: 62px; margin-top: 2px; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.hero .eo svg.cap { display: block; width: 100%; height: 100%; }
+.hero .eo span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: Fraunces, Georgia, serif; font-weight: 800; font-size: 1.35rem; color: var(--navy); letter-spacing: .02em; }
+.hero .brand { display: inline-block; font-weight: 700; font-size: .82rem; letter-spacing: .08em; background: var(--wine-2); color: #fff; padding: 5px 10px; border-radius: 6px; }
+.hero h1 { font-family: Fraunces, Georgia, "Times New Roman", serif; font-weight: 800; font-size: clamp(1.4rem, 7.4vw, 2.05rem); letter-spacing: .03em; line-height: 1.15; margin: 0 0 6px; white-space: nowrap; }
+.hero h1 .hl { font-size: 1.6em; color: var(--gold); font-weight: 800; padding: 0 .02em; }
+.hero p { margin: 0; font-size: .93rem; color: #cfdcf3; }
+.hero::after {
+  content: ""; position: absolute; right: -40px; top: -50px; width: 190px; height: 190px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(146,32,80,.55), rgba(146,32,80,0) 70%);
+}
+.hero .gold-line { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: linear-gradient(90deg, var(--wine) 0 65%, var(--gold) 65% 100%); }
+main { max-width: 560px; margin: -24px auto 0; padding: 0 14px 40px; position: relative; z-index: 2; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 14px; box-shadow: 0 6px 18px rgba(15,37,71,.10); }
+.card h2 { color: var(--accent-t); display: flex; align-items: center; gap: 10px; font-size: 1.05rem; margin: 0 0 12px; font-weight: 700; }
+.badge { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--wine-2); color: #fff; font-size: .85rem; display: inline-flex; align-items: center; justify-content: center; }
+.field { position: relative; }
+input[type=text] {
+  width: 100%; font-size: 1.05rem; padding: 13px 14px; border-radius: 12px;
+  border: 2px solid var(--line); background: var(--field); color: var(--text);
+}
+input[type=text]:focus { outline: none; border-color: var(--navy-2); box-shadow: 0 0 0 3px var(--navy-soft); }
+#lot { font-size: 1.25rem; font-weight: 600; letter-spacing: .04em; padding-right: 80px; }
+.clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: var(--navy-soft); color: var(--accent-t); border: 0; border-radius: 8px; padding: 7px 12px; font-weight: 600; font-size: .85rem; cursor: pointer; }
+.list { max-height: 270px; overflow-y: auto; margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; }
+.list button { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 10px; text-align: left; padding: 12px 14px; font-size: .95rem; background: var(--card); color: var(--text); border: 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.list button:last-child { border-bottom: 0; }
+.list button:active { background: var(--navy-soft); }
+.list .nm { flex: 1; word-break: break-word; }
+.empty { padding: 12px 14px; color: var(--muted); font-size: .9rem; }
+.chip { flex: none; font-size: .72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--c) 17%, transparent); color: color-mix(in srgb, var(--c) 72%, var(--text)); white-space: nowrap; }
+.t-JULIANO { --c: #2a87a8; } .t-SEMANA { --c: #8a63c7; } .t-MESDIA { --c: #2f9468; }
+.t-DIALETRA { --c: #cc7a2c; } .t-NOCADUCA { --c: #c9962a; } .t-ESPECIAL { --c: #8a8a8a; }
+.chosen { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.chosen .nm { font-weight: 700; font-size: 1.02rem; word-break: break-word; }
+.chosen .chip { display: inline-block; margin-top: 6px; }
+.link { background: var(--navy-soft); border: 0; color: var(--accent-t); font-weight: 600; font-size: .85rem; cursor: pointer; padding: 7px 12px; border-radius: 8px; white-space: nowrap; }
+.howto { margin-top: 12px; padding: 10px 12px; border-left: 4px solid var(--wine-2); background: var(--navy-soft); border-radius: 0 10px 10px 0; font-size: .9rem; }
+.howto b { display: block; margin-bottom: 2px; }
+.result { border-radius: 16px; padding: 20px 18px; margin-bottom: 14px; color: #fff; box-shadow: 0 8px 22px rgba(0,0,0,.18); }
+.result h2 { margin: 0 0 4px; font-size: .95rem; font-weight: 600; opacity: .9; }
+.result .big { font-family: Fraunces, Georgia, serif; font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin: 4px 0; }
+.result .small { font-size: 1rem; opacity: .95; }
+.result.ok { background: linear-gradient(135deg, #14663b, #1f8a55); }
+.result.warn { background: linear-gradient(135deg, #8a5a00, #b57a10); }
+.result.warn .big { font-size: 1.6rem; }
+.result.err { background: linear-gradient(135deg, #922020, #b73535); }
+.result.err .big { font-size: 1.3rem; }
+.detail { margin-top: 14px; padding: 12px; background: rgba(255,255,255,.16); border-radius: 12px; font-size: .9rem; }
+.detail p { margin: 0 0 6px; }
+.detail p:last-child { margin: 0; }
+.note { display: flex; gap: 10px; background: var(--card); border: 1px solid var(--gold); border-left-width: 6px; border-radius: 12px; padding: 12px; font-size: .9rem; margin-bottom: 14px; }
+.note svg { flex: none; width: 20px; height: 20px; margin-top: 1px; }
+footer { color: var(--muted); font-size: .8rem; margin-top: 8px; text-align: center; }
+.hidden { display: none; }
+button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-in">
+    <div class="top">
+      <div class="logo-plate"><svg viewBox="0 0 206 148" role="img" aria-label="Andina Licores Colemun S.A.">
+  <defs>
+    <path id="arcTop" d="M 67.5 52 A 35.5 35.5 0 0 1 138.5 52"/>
+    <path id="arcBot" d="M 62.5 52 A 40.5 40.5 0 0 0 143.5 52"/>
+  </defs>
+  <g fill="none" stroke="#12285a">
+    <circle cx="103" cy="52" r="47" stroke-width="2.6"/>
+    <circle cx="103" cy="52" r="43.5" stroke-width=".9"/>
+    <circle cx="103" cy="52" r="29.5" stroke-width="1.2"/>
+  </g>
+  <g fill="#12285a" font-family="Cinzel, 'Trajan Pro', Georgia, serif" font-weight="600">
+    <text font-size="8.6" letter-spacing="1.6" text-anchor="middle"><textPath href="#arcTop" startOffset="50%">ANDINA LICORES</textPath></text>
+    <text font-size="6.6" letter-spacing="1.3" text-anchor="middle"><textPath href="#arcBot" startOffset="50%">WINE · SPIRITS · BEERS</textPath></text>
+    <text x="103" y="68.5" font-family="'Bodoni Moda', 'Didot', Georgia, serif" font-weight="600" font-size="46" text-anchor="middle">A</text>
+    <text x="103" y="124" font-size="21" font-weight="500" text-anchor="middle" letter-spacing="1.2" textLength="196" lengthAdjust="spacing">ANDINA LICORES</text>
+    <text x="103" y="142" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="3.2">COLEMUN S.A.</text>
+  </g>
+</svg></div>
+      <span class="brand">BODEGA COLEMUN CUENCA</span>
+      <div class="eo" role="img" aria-label="EO"><svg class="cap" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><radialGradient id="capg" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#f4cd7a"/><stop offset=".55" stop-color="#e0a93b"/><stop offset="1" stop-color="#b98120"/></radialGradient></defs>
+        <path d="M32.00 1.50 L36.05 5.10 L40.99 2.86 L43.80 7.49 L49.18 6.80 L50.50 12.06 L55.85 12.98 L55.56 18.40 L60.39 20.86 L58.52 25.95 L62.41 29.72 L59.12 34.03 L61.74 38.79 L57.32 41.94 L58.41 47.25 L53.27 48.96 L52.75 54.36 L47.32 54.47 L45.23 59.48 L40.02 57.99 L36.55 62.16 L32.00 59.20 L27.45 62.16 L23.98 57.99 L18.77 59.48 L16.68 54.47 L11.25 54.36 L10.73 48.96 L5.59 47.25 L6.68 41.94 L2.26 38.79 L4.88 34.03 L1.59 29.72 L5.48 25.95 L3.61 20.86 L8.44 18.40 L8.15 12.98 L13.50 12.06 L14.82 6.80 L20.20 7.49 L23.01 2.86 L27.95 5.10Z" fill="url(#capg)" stroke="#a5721a" stroke-width="1" stroke-linejoin="round"/>
+        <circle cx="32" cy="32" r="21.5" fill="none" stroke="#a5721a" stroke-width="1.2" opacity=".75"/>
+        <circle cx="32" cy="32" r="23.6" fill="none" stroke="#fff3cf" stroke-width=".8" opacity=".6"/>
+      </svg><span aria-hidden="true">EO</span></div>
+    </div>
+    <h1 aria-label="EO, lector de lotes">L<span class="hl">E</span>CTOR DE L<span class="hl">O</span>TES</h1>
+    <p>Conoce la fecha de elaboración de tu producto en segundos.</p>
+  </div>
+  <div class="gold-line"></div>
+</header>
+
+<main>
+  <section class="card" id="brandCard">
+    <h2><span class="badge">1</span>Elige la marca</h2>
+    <div id="brandPicker">
+      <input type="text" id="search" placeholder="Escribe para buscar…" autocomplete="off" autocapitalize="characters" enterkeyhint="search" aria-label="Buscar marca">
+      <div class="list" id="list"></div>
+    </div>
+    <div id="brandChosen" class="chosen hidden">
+      <div><div class="nm" id="brandName"></div><span class="chip" id="brandChip"></span></div>
+      <button class="link" id="change" type="button">Cambiar marca</button>
+    </div>
+  </section>
+
+  <section class="card hidden" id="lotCard">
+    <h2><span class="badge">2</span>Escribe el lote</h2>
+    <div class="field">
+      <input type="text" id="lot" placeholder="Lote impreso" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" aria-label="Lote">
+      <button class="clear hidden" id="clear" type="button">Borrar</button>
+    </div>
+    <div class="howto"><b>Cómo se lee este lote</b><span id="lotHint"></span></div>
+  </section>
+
+  <div id="out"></div>
+
+  <footer><b>EO</b> · Lector de lotes · Bodega Colemun Cuenca<br>Fecha estimada según la regla de cada marca. Ante cualquier duda, confirmar con el área de calidad.</footer>
+</main>
+
+<script>
+const RULES = [{"marca": "AMARO MONTENEGRO", "ejemplo": "L1730444", "regla": "17 (año embotellamiento) 304 (día juliano) 44 (hora)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "AMARULA", "ejemplo": "LG507B18", "regla": "L: Lote / G: lugar / 5: línea / 07 (día) / B (mes, letra A=1...L=12) / 18 (año)", "tipo": "DIALETRA", "pa": 7, "la": 2, "p2": 6, "l2": 1, "p3": 4, "l3": 2, "notas": "Posiciones sobre el texto completo del lote (no solo dígitos). Prefijo fijo 'LG' + 1 dígito de línea."}, {"marca": "BOTRAN", "ejemplo": "L172074L150", "regla": "17 (año) 207 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": "El ejemplo original del área (207) da 26-jul-2017; la fecha de referencia indicada era 27-jul-2017 (día juliano 208). Verificar con el área de calidad cuál es el valor correcto antes de confiar 100% en este formato."}, {"marca": "CODORNIU", "ejemplo": "L.4264T21", "regla": "4 (año, 1 dígito) 264 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 1, "p2": 2, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "DISARONNO Y TIA MARIA", "ejemplo": "L1010533", "regla": "10 (año) 10 (semana) 5 (día de semana, 1=lunes...7=domingo)", "tipo": "SEMANA", "pa": 1, "la": 2, "p2": 3, "l2": 2, "p3": 5, "l3": 1, "notas": ""}, {"marca": "ESTELADO BRUT - ROSÉ", "ejemplo": "L22123", "regla": "221 (día juliano) 23 (año) — orden invertido", "tipo": "JULIANO", "pa": 4, "la": 2, "p2": 1, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "GREENALS", "ejemplo": "L1730444", "regla": "17 (año) 304 (día juliano) 44 (hora)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "JP CHENET", "ejemplo": "L70407203", "regla": "7 (año, 1 dígito) 04 (mes) 07 (día)", "tipo": "MESDIA", "pa": 1, "la": 1, "p2": 2, "l2": 2, "p3": 4, "l3": 2, "notas": ""}, {"marca": "LAMBRUSCO", "ejemplo": "L20062", "regla": "20 (año) 062 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "LAS MORAS Y EL ESTECO", "ejemplo": "L 12031", "regla": "12 (año) 031 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "LAS MULAS Y CORDILLERA", "ejemplo": "L.21084", "regla": "21 (año) 084 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "LONDON N3 GIN", "ejemplo": "L31615 15292", "regla": "3 (línea) 16 (semana) 15 (año) 1529 (hora) 2 (día semana)", "tipo": "SEMANA", "pa": 4, "la": 2, "p2": 2, "l2": 2, "p3": 10, "l3": 1, "notas": ""}, {"marca": "NEBLA Y BOBAL", "ejemplo": "L3043", "regla": "3 (año, 1 dígito) 043 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 1, "p2": 2, "l2": 3, "p3": 0, "l3": 0, "notas": "El texto original de la regla decía '2' pero el dígito real del lote es '3'; se usó el que coincide con el ejemplo."}, {"marca": "REGION CONDE DE LA CRUZ", "ejemplo": "L-3012 13:23", "regla": "3 (año, 1 dígito) 012 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 1, "p2": 2, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "SANDARA  Y CASTILLO DE LIRIA", "ejemplo": "L7043", "regla": "7 (año, 1 dígito) 043 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 1, "p2": 2, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "SANTA HELENA", "ejemplo": "L18003", "regla": "18 (año) 003 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "SANTA MARGHERITA Y TORRESELLA", "ejemplo": "L20018 H35105D7", "regla": "20 (año) 018 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "SANTERO", "ejemplo": "L21026C6", "regla": "21 (año) 026 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "SCOTTISH LEADER", "ejemplo": "L31112911:30", "regla": "3 (línea) 11 (año) 129 (día juliano) 11:30 (hora)", "tipo": "JULIANO", "pa": 2, "la": 2, "p2": 4, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "STARLINO", "ejemplo": "L21067 9:30", "regla": "21 (año) 067 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "THE BUSKER", "ejemplo": "L1010533", "regla": "10 (año) 10 (semana) 5 (día de semana, 1=lunes...7=domingo)", "tipo": "SEMANA", "pa": 1, "la": 2, "p2": 3, "l2": 2, "p3": 5, "l3": 1, "notas": ""}, {"marca": "TORRES (SANGRE DE TORO, PAZO DAS BRUXAS, CELESTE, ALTOS IBERICOS, BRANDY TORRES, FLORALIS MOSCATEL)", "ejemplo": "L22025", "regla": "22 (año) 025 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "UMBERTO CESARI", "ejemplo": "L. D1009/01", "regla": "D (año, código de letra) 10 (semana) 09 (día de la semana)", "tipo": "ESPECIAL", "pa": 0, "la": 0, "p2": 0, "l2": 0, "p3": 0, "l3": 0, "notas": "La regla tal como fue entregada no permite calcular una fecha automática confiable (el código de letra para el año y el dígito de día de semana no cuadran con el ejemplo). Verificar con el área de calidad antes de automatizar."}, {"marca": "VENTISQUERO Y TANTEHUE", "ejemplo": "LOT: 23205", "regla": "23 (año) 205 (día juliano)", "tipo": "JULIANO", "pa": 1, "la": 2, "p2": 3, "l2": 3, "p3": 0, "l3": 0, "notas": ""}, {"marca": "DESTILADOS", "ejemplo": "", "regla": "Productos con grado alcohólico superior a 30°, no caducan.", "tipo": "NOCADUCA", "pa": 0, "la": 0, "p2": 0, "l2": 0, "p3": 0, "l3": 0, "notas": ""}];
+const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const DIAS = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const TIPOS = { JULIANO: "Día juliano", SEMANA: "Semana del año", MESDIA: "Mes y día", DIALETRA: "Mes en letra", NOCADUCA: "No caduca", ESPECIAL: "Revisión manual" };
+const $ = id => document.getElementById(id);
+let current = null;
+
+function mid(s, pos, len) { return s.substr(pos - 1, len); }
+function digitsOf(lot) {
+  let out = "";
+  for (const c of lot.slice(0, 15)) if (c >= "0" && c <= "9") out += c;
+  return out;
+}
+function fullYear(txt, len) {
+  const v = parseInt(txt, 10);
+  if (isNaN(v)) return NaN;
+  if (len === 1) {
+    const y = new Date().getFullYear();
+    return (Math.floor(y / 10) - (v > y % 10 ? 1 : 0)) * 10 + v;
+  }
+  return 2000 + v;
+}
+function fmt(d) {
+  const dd = String(d.getUTCDate()).padStart(2, "0");
+  const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+  return { short: dd + "/" + mm + "/" + d.getUTCFullYear(),
+           long: DIAS[d.getUTCDay()] + " " + d.getUTCDate() + " de " + MESES[d.getUTCMonth()] + " de " + d.getUTCFullYear() };
+}
+const addDays = (d, n) => new Date(d.getTime() + n * 86400000);
+
+function compute(r, lotRaw) {
+  const lot = lotRaw.trim().toUpperCase();
+  if (r.tipo === "NOCADUCA") return { kind: "warn", big: "No caduca", small: "Producto con grado alcohólico superior a 30°." };
+  if (r.tipo === "ESPECIAL") return { kind: "warn", big: "Verificar manualmente", small: "Esta marca no permite un cálculo automático confiable." };
+  if (!lot) return null;
+  const dig = digitsOf(lot);
+  const src = r.tipo === "DIALETRA" ? lot : dig;
+  const yTxt = mid(src, r.pa, r.la), c2 = mid(src, r.p2, r.l2), c3 = r.p3 ? mid(src, r.p3, r.l3) : "";
+  const bad = { kind: "err", big: "El lote no coincide con el formato de esta marca", small: "Revisa que esté escrito tal como aparece impreso." };
+  if (yTxt.length < r.la || c2.length < r.l2 || (r.p3 && c3.length < r.l3)) return bad;
+  const year = fullYear(yTxt, r.la);
+  if (isNaN(year)) return bad;
+  let d, parts;
+  if (r.tipo === "JULIANO") {
+    const n = parseInt(c2, 10);
+    const leap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    if (isNaN(n) || n < 1 || n > (leap ? 366 : 365)) return bad;
+    d = addDays(new Date(Date.UTC(year, 0, 1)), n - 1);
+    parts = "Año " + year + " · día juliano " + n;
+  } else if (r.tipo === "MESDIA") {
+    const m = parseInt(c2, 10), dy = parseInt(c3, 10);
+    if (isNaN(m) || isNaN(dy) || m < 1 || m > 12 || dy < 1 || dy > 31) return bad;
+    d = new Date(Date.UTC(year, m - 1, dy));
+    if (d.getUTCMonth() !== m - 1) return bad;
+    parts = "Año " + year + " · mes " + m + " · día " + dy;
+  } else if (r.tipo === "SEMANA") {
+    const w = parseInt(c2, 10), dw = parseInt(c3, 10);
+    if (isNaN(w) || isNaN(dw) || w < 1 || w > 53 || dw < 1 || dw > 7) return bad;
+    const jan4 = new Date(Date.UTC(year, 0, 4));
+    const wd = jan4.getUTCDay() || 7;
+    d = addDays(jan4, -(wd - 1) + (w - 1) * 7 + (dw - 1));
+    parts = "Año " + year + " · semana " + w + " · día de la semana " + dw;
+  } else if (r.tipo === "DIALETRA") {
+    const m = c2.charCodeAt(0) - 64, dy = parseInt(c3, 10);
+    if (!/^[A-L]$/.test(c2) || isNaN(dy) || dy < 1 || dy > 31) return bad;
+    d = new Date(Date.UTC(year, m - 1, dy));
+    if (d.getUTCMonth() !== m - 1) return bad;
+    parts = "Año " + year + " · letra " + c2 + " (mes " + m + ") · día " + dy;
+  } else return { kind: "err", big: "Marca no reconocida", small: "" };
+  const f = fmt(d);
+  const future = d.getTime() > Date.now() + 86400000;
+  return { kind: future ? "warn" : "ok", big: f.short, small: f.long + (future ? " (fecha futura: revisa el lote)" : ""), parts, oneDigit: r.la === 1 };
+}
+
+function chipHTML(t) { return '<span class="chip t-' + t + '">' + TIPOS[t] + '</span>'; }
+
+function renderList() {
+  const q = $("search").value.trim().toUpperCase();
+  const items = RULES.filter(r => r.marca.toUpperCase().includes(q));
+  const list = $("list");
+  list.innerHTML = "";
+  if (!items.length) { list.innerHTML = '<div class="empty">No se encontró esa marca. Prueba con otra parte del nombre.</div>'; return; }
+  items.forEach(r => {
+    const b = document.createElement("button");
+    b.type = "button";
+    const nm = document.createElement("span"); nm.className = "nm"; nm.textContent = r.marca;
+    b.appendChild(nm);
+    b.insertAdjacentHTML("beforeend", chipHTML(r.tipo));
+    b.onclick = () => choose(r);
+    list.appendChild(b);
+  });
+}
+function choose(r) {
+  current = r;
+  $("brandPicker").classList.add("hidden");
+  $("brandChosen").classList.remove("hidden");
+  $("brandName").textContent = r.marca;
+  $("brandChip").className = "chip t-" + r.tipo;
+  $("brandChip").textContent = TIPOS[r.tipo];
+  const needsLot = r.tipo !== "NOCADUCA" && r.tipo !== "ESPECIAL";
+  $("lotCard").classList.toggle("hidden", !needsLot);
+  $("lot").value = "";
+  $("clear").classList.add("hidden");
+  $("lot").placeholder = needsLot && r.ejemplo ? "Ej.: " + r.ejemplo : "Lote impreso";
+  $("lotHint").textContent = r.regla;
+  update();
+  if (needsLot) setTimeout(() => $("lot").focus(), 50);
+}
+function update() {
+  const out = $("out");
+  out.innerHTML = "";
+  if (!current) return;
+  $("clear").classList.toggle("hidden", !$("lot").value);
+  const res = compute(current, $("lot").value);
+  if (res) {
+    const div = document.createElement("div");
+    div.className = "result " + res.kind;
+    div.innerHTML = '<h2></h2><div class="big"></div><div class="small"></div>';
+    div.querySelector("h2").textContent = res.kind === "err" ? "Revisa el lote" : (current.tipo === "NOCADUCA" || current.tipo === "ESPECIAL") ? "Resultado" : "Fecha de elaboración estimada";
+    div.querySelector(".big").textContent = res.big;
+    div.querySelector(".small").textContent = res.small;
+    if (res.parts) {
+      const det = document.createElement("div");
+      det.className = "detail";
+      const p1 = document.createElement("p"); p1.innerHTML = "<b>Lote leído:</b> "; p1.append(res.parts);
+      const p2 = document.createElement("p"); p2.innerHTML = "<b>Regla aplicada:</b> "; p2.append(current.regla);
+      det.append(p1, p2);
+      if (res.oneDigit) {
+        const p = document.createElement("p");
+        p.textContent = "El año trae un solo dígito: se asume que el lote fue embotellado en los últimos 10 años.";
+        det.appendChild(p);
+      }
+      div.appendChild(det);
+    }
+    out.appendChild(div);
+  }
+  if (current.notas) {
+    const n = document.createElement("div");
+    n.className = "note";
+    n.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#c9962a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16.5v.5"/></svg><div><b>Nota de esta marca</b><br><span></span></div>';
+    n.querySelector("span").textContent = current.notas;
+    out.appendChild(n);
+  }
+}
+$("search").addEventListener("input", renderList);
+$("lot").addEventListener("input", update);
+$("clear").onclick = () => { $("lot").value = ""; update(); $("lot").focus(); };
+$("change").onclick = () => {
+  current = null;
+  $("brandPicker").classList.remove("hidden");
+  $("brandChosen").classList.add("hidden");
+  $("lotCard").classList.add("hidden");
+  $("out").innerHTML = "";
+  $("search").value = "";
+  renderList();
+  $("search").focus();
+};
+renderList();
+</script>
+</body>
+</html>
